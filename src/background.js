@@ -7,32 +7,28 @@ const apiCryptoNames = {
 }
 
 chrome.runtime.onInstalled.addListener(function() {
-
+  let notification;
   setInterval(() => {
-    let notifications = [];
+    notification = [];
     chrome.storage.local.get(['limits'], (result) => {
       result.limits.forEach((limit, index) =>  {
         const url = 'https://api.coincap.io/v2/assets/' + apiCryptoNames[limit.crypto];
         axios.get(url)
         .then((response) => {
           if (checkResponse(limit, Number(response.data.data.priceUsd))) {
-            notifications.push(limit);
+            notification = limit;
             limit.reached = true;
             result.limits[index]= limit;
             chrome.storage.local.set({limits: result.limits});
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+              chrome.tabs.sendMessage(tabs[0].id, {notification}, function() {});
+            });
           }
         });
       });
     });
     
-    if (notifications.length > 0) {
-      //chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        //chrome.tabs.sendMessage(tabs[0].id, {notifications});
-      //});
-    }
-
-  }, 5000);
-
+  }, 10000);
 });
 
 const checkResponse = (limit, cryptoPrice) => {

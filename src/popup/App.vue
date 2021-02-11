@@ -11,19 +11,19 @@
         
         <h3 class = "sub-title"> Your Current Limits </h3>
         <div class = "current">
-        <p> <font-awesome-icon icon="check" class = "check-icon"/> --- means that the limit was reached </p>
+        <p> A green checkamrk (<font-awesome-icon icon="check" class = "check-icon"/>) means that the limit was reached. </p>
        
         <div class = "empty">
         <p v-if="limits.length == 0"> You currently do not have any limits set. </p>
         </div>
-        <ul>
+        <ol>
           <li v-for="limit in limits" v-bind:key="limit">
             {{limit.crypto}} {{limit.zone.toLowerCase()}} {{limit.price}} {{limit.currency}}
             <font-awesome-icon icon="check" v-if="limit.reached" class = "check-icon"/>
             <button class = "remove-limit" v-on:click="removeLimit(limit.id)"> Remove </button>
           </li>
 
-        </ul>
+        </ol>
          </div>
     </div>
 
