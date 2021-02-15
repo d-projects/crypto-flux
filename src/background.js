@@ -3,7 +3,8 @@ import axios from 'axios'
 const apiCryptoNames = {
   'BTC': 'bitcoin',
   'ETH': 'ethereum',
-  'LTC': 'litecoin'
+  'LTC': 'litecoin',
+  'DOGE': 'dogecoin'
 }
 
 chrome.runtime.onInstalled.addListener(function() {
@@ -28,7 +29,7 @@ chrome.runtime.onInstalled.addListener(function() {
       });
     });
     
-  }, 10000);
+  }, 30000);
 });
 
 const checkResponse = (limit, cryptoPrice) => {

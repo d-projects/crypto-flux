@@ -1,6 +1,6 @@
 {
   "extName": {
     "message": "crypto-flux",
-    "description": ""
+    "description": "A chrome extension that alerts you when cryptocurrencies reach limits that are preset by you."
   }
 }
