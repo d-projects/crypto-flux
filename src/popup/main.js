@@ -22,7 +22,6 @@ Vue.component('prices', Prices)
 Vue.component('current-limits', CurrentLimits)
 Vue.component('add-limit', AddLimit)
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   render: h => h(App)

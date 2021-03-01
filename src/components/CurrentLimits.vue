@@ -13,7 +13,7 @@
             <p v-if="limits.length == 0"> You currently do not have any limits set. </p>
             </div>
             <ul class="list-group">
-                <li v-for="limit in limits" v-bind:key="limit" class="list-group-item">
+                <li v-for="limit in limits" v-bind:key="limit" class="list-group-item" :class="limit.reached ? 'current-success' : ''">
                     {{limit.crypto}} {{limit.zone.toLowerCase()}} ${{limit.price}} {{limit.currency}}
                     <font-awesome-icon icon="check" v-if="limit.reached" class = "check-icon"/>
                     <font-awesome-icon icon="trash" v-on:click="removeLimit(limit.id)" class = "trash-icon"/>
@@ -108,6 +108,10 @@ module.exports = {
   width: 30px;
   display: inline;
   margin-bottom: 15px;
+}
+
+.current-success {
+  background-color: lightgreen;
 }
 
 </style>

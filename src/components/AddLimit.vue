@@ -7,7 +7,7 @@
 
         <label for = "crypto"> Crypto: </label>
         <select class = "form-control input" id = "crypto" v-model = "newLimit.crypto">
-            <option v-for="coin in coinsPriceData" :key="coin.symbol">{{coin.name}} - {{coin.symbol}}</option>
+            <option v-for="coin in coinsPriceData" :key="coin.symbol" :value="coin.symbol">{{coin.name}} - {{coin.symbol}}</option>
         </select>
 
         <br/>
@@ -101,6 +101,8 @@ module.exports = {
           }
         });
       }
+
+      this.newLimit.price = parseFloat(this.newLimit.price).toFixed(3);
 
       if (!this.error) {
         this.success = true;
