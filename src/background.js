@@ -8,28 +8,31 @@ const apiCryptoNames = {
 }
 
 chrome.runtime.onInstalled.addListener(function() {
-  let notification;
   setInterval(() => {
-    notification = [];
     chrome.storage.local.get(['limits'], (result) => {
       result.limits.forEach((limit, index) =>  {
         const url = 'https://api.coincap.io/v2/assets/' + apiCryptoNames[limit.crypto];
         axios.get(url)
         .then((response) => {
           if (checkResponse(limit, Number(response.data.data.priceUsd))) {
-            notification = limit;
             limit.reached = true;
             result.limits[index]= limit;
             chrome.storage.local.set({limits: result.limits});
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-              chrome.tabs.sendMessage(tabs[0].id, {notification}, function() {});
-            });
+
+            var opt = {
+              iconUrl: "icons/all_sizes.png",
+              type: 'basic',
+              title: 'Crypto Flux - Limit Reached',
+              message: `Your limit price for ${limit.crypto} ${limit.zone.toLowerCase()} $${limit.price} ${limit.currency} was just reached!`,
+            };
+            chrome.notifications.create(`notification-${Date.now()}`, opt);
+      
           }
         });
       });
     });
     
-  }, 30000);
+  }, 10100);
 });
 
 const checkResponse = (limit, cryptoPrice) => {

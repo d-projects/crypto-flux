@@ -3,7 +3,7 @@
 
         <div class = "sync sync-prices">
             <font-awesome-icon icon="sync" class = "sync-icon" v-on:click="setPriceData"/>
-            <font-awesome-icon icon="info-circle" class = "sync-info" data-toggle="tooltip" data-placement="left" title="The sync button refreshes the data below, which updates every 30 seconds."/>
+            <font-awesome-icon icon="info-circle" class = "sync-info" data-toggle="tooltip" data-placement="left" title="The sync button refreshes the data below, which updates every 10 seconds."/>
         </div>
 
         <h3 class = "sub-title-prices"> Crypto Prices </h3>

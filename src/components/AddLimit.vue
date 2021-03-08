@@ -94,6 +94,7 @@ module.exports = {
       } else if (this.limits.length == 5) {
           this.error = 'You have 5 limits set. Remove one if you want to add another';
       } else if (!this.error) {
+        this.newLimit.price = parseFloat(this.newLimit.price).toFixed(3);
         this.limits.forEach(limit => {
           if (limit.currency == this.newLimit.currency && limit.crypto == this.newLimit.crypto && limit.price == this.newLimit.price) {
             this.error = 'You already have a matching limit set.';
@@ -102,7 +103,7 @@ module.exports = {
         });
       }
 
-      this.newLimit.price = parseFloat(this.newLimit.price).toFixed(3);
+      
 
       if (!this.error) {
         this.success = true;
