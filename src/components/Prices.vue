@@ -1,11 +1,5 @@
 <template>
     <div>
-
-        <div class = "sync sync-prices">
-            <font-awesome-icon icon="sync" class = "sync-icon" v-on:click="setPriceData"/>
-            <font-awesome-icon icon="info-circle" class = "sync-info" data-toggle="tooltip" data-placement="left" title="The sync button refreshes the data below, which updates every 10 seconds."/>
-        </div>
-
         <h3 class = "sub-title-prices"> Crypto Prices </h3>
         <label for = "currency"> Currency: </label>
         <select class = "form-control input prices-curr" id = "currency" v-model = "chosenCurrency">
@@ -26,6 +20,9 @@
             </tr>
             </tbody>
         </table>
+            <div class = "prices-note">
+              <p> Updated every 30 seconds </p>
+            </div>
 
     </div>
 </template>
@@ -96,24 +93,14 @@ module.exports = {
   
 <style>
 
+.prices-note {
+  float: right;
+  font-size: 10px;
+}
+
 p, label {
   font-size: 15px;
 }
-
-.sync {
-  margin-top: 5px;
-  float: right;
-  display: flex;
-  width: 40px;
-  justify-content: space-between;
-  color: black;
-}
-
-.sync-icon:hover {
-  cursor: pointer;
-  color: blue;
-}
-
 
 .sub-title-prices {
   color: orange;

@@ -1,10 +1,5 @@
 <template>
-    <div>
-        <div class = "sync sync-limits" v-if="limits.length > 0">
-            <font-awesome-icon icon="sync" class = "sync-icon" v-on:click="syncData"/>
-            <font-awesome-icon icon="info-circle" class = "sync-info" data-toggle="tooltip" data-placement="left" title="The sync button refreshes the data below, which updates every 10 seconds."/>
-        </div>
-        
+    <div>       
         <h3 class = "sub-title-current"> Your Current Limits </h3>
         
         <div class = "current">
@@ -21,6 +16,9 @@
 
             </ul>
             <button type = "button" class = "clear-all bttn-jelly bttn-sm bttn-danger nav-bttn" v-if="limits.length > 0" v-on:click="clear"> Remove All </button>
+            <div class = "prices-note">
+              <p> Updated every 30 seconds </p>
+            </div>
         </div>
     </div>
 </template>
@@ -60,12 +58,6 @@ module.exports = {
       this.error = '';
     },
 
-    syncData: function() {
-      chrome.storage.local.get(["limits"], (result) => {
-        this.limits = result.limits;
-      });
-    }
-
   }
 }
 
@@ -73,8 +65,11 @@ module.exports = {
 
 <style>
 
-.sync-limits {
-  margin-right: 25px;
+.prices-note {
+  color: grey;
+  margin-top: 5px;
+  float: right;
+  font-size: 10px;
 }
 
 .check-icon {
