@@ -67,7 +67,6 @@ module.exports = {
     },
   
     methods: {
-  
       setPriceData: function() {
         fetch('https://api.coincap.io/v2/assets/')
         .then(response => response.json())
@@ -81,7 +80,7 @@ module.exports = {
       },
   
       setCurrencyMultipliers: function() {
-        fetch("https://api.exchangeratesapi.io/latest?base=USD").
+        fetch("https://api.exchangerate-api.com/v4/latest/usd").
         then(response => response.json())
         .then(result => {
           Object.keys(this.currencies).forEach(key => {
