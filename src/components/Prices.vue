@@ -47,6 +47,7 @@ export default {
     },
 
     mounted: async function() {
+      this.failedApiRequest = false;
       await this.setPriceData();
       await this.setCurrencyMultipliers();
     },
@@ -65,8 +66,8 @@ export default {
               this.coinsPriceData[index].price = parseFloat(coin.priceUsd).toFixed(3);
             }
           });
-          this.failedApiRequest = false;          
         } catch (err) {
+          console.error(err);
           this.failedApiRequest = true;
         }
       },
@@ -82,8 +83,8 @@ export default {
             if (curr.symbol != 'USD') this.currencies[index]['exchangeRate'] = result.data.rates[curr.symbol].toFixed(3);
             else this.currencies[index]['exchangeRate'] = 1;
           });
-          this.failedApiRequest = false;
         } catch (err) {
+          console.error(err);
           this.failedApiRequest = true;
         }
       },
