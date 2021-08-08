@@ -13,7 +13,7 @@
         <br/>
         <label for = "currency"> Currency: </label>
         <select class = "form-control input" id = "currency" v-model = "newLimit.currency">
-            <option v-for="curr in currencies" :key="curr">{{curr}}</option>
+            <option v-for="curr in currencies" :key="curr.symbol">{{curr.symbol}}</option>
         </select>
 
         <br/>
@@ -34,8 +34,10 @@
 
 
 <script>
+import coinsPriceData from '../utils/coinsPriceData';
+import currencies from '../utils/currencies';
 
-module.exports = {
+export default {
   data: function () {
     return {
       limits: [],
@@ -49,28 +51,8 @@ module.exports = {
       },
       error: '',
       success: false,
-      coinsPriceData: [
-        {
-          symbol: 'BTC',
-          name: 'Bitcoin'
-        },
-        {
-          symbol: 'ETH',
-          name: 'Ethereum'
-        },
-        {
-          symbol: 'LTC',
-          name: 'Litecoin'
-        },
-        {
-          symbol: 'DOGE',
-          name: 'Dogecoin'
-        }
-      ],
-      currencies: [
-        'USD',
-        'CAD'
-      ]
+      coinsPriceData,
+      currencies,
     }
   },
 
@@ -83,7 +65,7 @@ module.exports = {
   },
 
   methods: {
-    addLimit: function () {
+    handleErrors: function () {
       this.error = '';
       if (typeof this.newLimit.currency == 'undefined' || typeof this.newLimit.crypto == 'undefined' || typeof this.newLimit.price == 'undefined' || typeof this.newLimit.zone == 'undefined') {
           this.error = 'Please fill out all the fields.';
@@ -102,8 +84,10 @@ module.exports = {
           }
         });
       }
+    },
 
-      
+    addLimit: function () {
+      this.handleErrors();
 
       if (!this.error) {
         this.success = true;
@@ -115,7 +99,6 @@ module.exports = {
         this.newLimit.currency = '';
         this.newLimit.zone = '';
       }
-
     },
 
   }

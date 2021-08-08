@@ -16,8 +16,8 @@
 
             </ul>
             <button type = "button" class = "clear-all bttn-jelly bttn-sm bttn-danger nav-bttn" v-if="limits.length > 0" v-on:click="clear"> Remove All </button>
-            <div class = "prices-note">
-              <p> Updated every 30 seconds </p>
+            <div v-if="limits.length > 0" class = "prices-note">
+              <p> Prices delayed up to 30 seconds </p>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
 
 <script>
 
-module.exports = {
+export default {
   data: function () {
     return {
       limits: [],

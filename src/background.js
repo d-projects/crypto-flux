@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const apiCryptoNames = {
   'BTC': 'bitcoin',
@@ -32,7 +32,7 @@ chrome.runtime.onInstalled.addListener(function() {
       });
     });
     
-  }, 10100);
+  }, 30000);
 });
 
 const checkResponse = (limit, cryptoPrice) => {
