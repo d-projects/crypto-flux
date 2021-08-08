@@ -16,8 +16,8 @@
 
             </ul>
             <button type = "button" class = "clear-all bttn-jelly bttn-sm bttn-danger nav-bttn" v-if="limits.length > 0" v-on:click="clear"> Remove All </button>
-            <div v-if="limits.length > 0" class = "prices-note">
-              <p> Prices delayed up to 30 seconds </p>
+            <div v-if="limits.length > 0" class = "notifications-note">
+              <p> Notifications can be delayed by up to 30 seconds </p>
             </div>
         </div>
     </div>
@@ -65,11 +65,14 @@ export default {
 
 <style>
 
-.prices-note {
+.notifications-note {
+  margin-top: -20px; /* TODO: Refactor to remove the negative */
+}
+
+.notifications-note p {
   color: grey;
-  margin-top: 5px;
   float: right;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .check-icon {
