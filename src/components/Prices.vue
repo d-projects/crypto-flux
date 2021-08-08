@@ -33,6 +33,7 @@
 <script>
 import coinsPriceData from '../utils/coinsPriceData';
 import currencies from '../utils/currencies';
+import axios from 'axios';
 
 export default {
     data: function () {
@@ -45,60 +46,52 @@ export default {
       }
     },
 
-    mounted: function() {
-      this.setPriceData();
-      this.setCurrencyMultipliers();
+    mounted: async function() {
+      await this.setPriceData();
+      await this.setCurrencyMultipliers();
     },
   
     methods: {
       // sets the coin price data after querying the price API
-      setPriceData: function() {
-        fetch('https://api.coincap.io/v2/assets/')
-        .then(response => response.json())
-        .then(result => {
-          result.data.forEach(coin => {
+      setPriceData: async function() {
+        try {
+          const result = await axios.get('https://api.coincap.io/v2/assets/');
+          if (result.error) {
+            throw Error(result.error);
+          }
+          result.data.data.forEach(coin => {
             const index = coinsPriceData.findIndex(storedCoin => storedCoin.symbol === coin.symbol);
-            console.log(index, coinsPriceData)
             if (index >= 0) {
               this.coinsPriceData[index].price = parseFloat(coin.priceUsd).toFixed(3);
             }
           });
-          this.failedApiRequest = false;
-        }).catch((err) => {
+          this.failedApiRequest = false;          
+        } catch (err) {
           this.failedApiRequest = true;
-          console.error("Error Getting Price Data", err);
-        });
-
-        console.log("Coins Price Data", this.coinsPriceData);
+        }
       },
   
       // sets the currency data after querying the currency API
-      setCurrencyMultipliers: function() {
-        fetch("https://api.exchangerate-api.com/v4/latest/usd").
-        then(response => response.json())
-        .then(result => {
+      setCurrencyMultipliers: async function() {
+        try {
+          const result = await axios.get('https://api.exchangerate-api.com/v4/latest/usd');
+          if (result.error) {
+            throw Error(result.error);
+          }
           this.currencies.forEach((curr, index) => {
-            if (curr.symbol != 'USD') this.currencies[index]['exchangeRate'] = result.rates[curr.symbol].toFixed(3);
+            if (curr.symbol != 'USD') this.currencies[index]['exchangeRate'] = result.data.rates[curr.symbol].toFixed(3);
             else this.currencies[index]['exchangeRate'] = 1;
           });
           this.failedApiRequest = false;
-        }).catch((err) => {
+        } catch (err) {
           this.failedApiRequest = true;
-          console.error("Error Getting Currency Data", err);
-        });
-
-        console.log("Currencies", this.currencies);
+        }
       },
 
-      // sets the exchaneg rate when the chosen currency is change
+      // sets the exchange rate when the chosen currency is change
       onChosenCurrencyChange: function () {
-      console.log("Currencies", this.currencies, this.chosenCurrencySymbol);
-      console.log("Find Result", this.currencies.find(curr => curr.symbol === this.chosenCurrencySymbol));
         const exchangeRate = this.currencies.find(curr => curr.symbol === this.chosenCurrencySymbol).exchangeRate;
         this.exchangeRate = parseFloat(exchangeRate).toFixed(3);
-        console.log("Exchange Rate", this.exchangeRate);
-        console.log("Here");
-        console.log(this.currencies, this.coinsPriceData, this.chosenCurrencySymbol);
       },
     }
   }
