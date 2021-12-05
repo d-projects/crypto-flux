@@ -1,23 +1,24 @@
 {
-  "manifest_version": 2,
-  "name": "__MSG_extName__",
-  "description": "Crypto Flux",
-  "default_locale": "en",
-  "permissions": [
-    "storage",
-    "notifications"
-  ],
   "background": {
     "scripts": [
-      "js/background.js"
+      "background/index.ts"
     ],
-    "persistent": false
+    "persistent": true
   },
+  "icons": {
+      "16": "assets/all_sizes.png"
+  },
+  "permissions": [
+    "storage",
+    "https://api.coincap.io/",
+    "notifications"
+  ],
   "browser_action": {
-    "default_popup": "popup.html",
     "default_title": "Crypto Flux",
-    "default_icon": {
-      "19": "icons/all_sizes.png"
-    }
-  }
+    "default_popup": "pages/popup/index.html",
+    "default_icon": "assets/all_sizes.png"
+  },
+  "name": "Crypto Flux",
+  "version": "1.0.0",
+  "description": "A crypto price tracker"
 }
