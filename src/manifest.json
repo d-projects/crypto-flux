@@ -19,6 +19,7 @@
     "default_icon": "assets/all_sizes.png"
   },
   "name": "Crypto Flux",
-  "version": "1.0.0",
-  "description": "A crypto price tracker"
+  "version": "1.0.1",
+  "description": "A crypto price tracker",
+  "default_locale": "en"
 }

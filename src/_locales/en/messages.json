@@ -1,0 +1,10 @@
+{
+    "appName": {
+      "message": "Crypto Flux",
+      "description": "A crypto price tracker."
+    },
+    "appDesc": {
+      "message": "A crypto price tracker.",
+      "description": "The description of the extension, displayed in the web store."
+    }
+  }
