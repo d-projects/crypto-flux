@@ -18,11 +18,20 @@ This is a chrome extension that allows you to track prices of multiple cryptocur
 * And one for looking up current crypto prices
 
 ## Running Locally
-Clone this repo and:
-
+Clone this repo and enter the new `crypto-flux` directory. Then run:
 ```
 npm run start
 ```
+
+A `dist` directory will be created in the crypto-flux directory.
+
+Then:
+1. Head to chrome://extensions/ on your Chrome web browser.
+2. Toggle "Developer Mode" on the top right.
+3. Click "Load Unpacked" on the top left.
+4. Select the mentioned "dist" folder.
+5. Pin the extension.
+
 
 ## Screenshots
 Check your Alerts          |  Set Alerts               |  Track specific coin prices
